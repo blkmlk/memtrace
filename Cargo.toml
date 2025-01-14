@@ -9,11 +9,5 @@ anyhow = "1.0"
 clap = "4.5"
 open = "5.3"
 
-[dependencies.common]
-path = "../memtrack-rs/common"
-
-[dependencies.interpret]
-path = "../memtrack-rs/interpret"
-
 [dependencies.memtrack]
-path = "../memtrack-rs"
+git = "https://github.com/blkmlk/memtrack-rs"

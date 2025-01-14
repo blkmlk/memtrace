@@ -193,10 +193,15 @@ checksum = "5b63caa9aa9397e2d9480a9b13673856c78d8ac123288526c37d7839f2a86990"
 [[package]]
 name = "common"
 version = "0.1.0"
+source = "git+https://github.com/blkmlk/memtrack-rs#552085a07ad4472e54d00b1999a82ef772443d66"
 dependencies = [
+ "addr2line",
  "bincode",
  "byteorder",
  "indexmap",
+ "nix",
+ "rangemap",
+ "rustc-demangle",
  "serde",
  "thiserror",
 ]
@@ -391,19 +396,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "interpret"
-version = "0.1.0"
-dependencies = [
- "addr2line",
- "common",
- "indexmap",
- "nix",
- "rangemap",
- "rustc-demangle",
- "thiserror",
-]
-
-[[package]]
 name = "is-docker"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -477,9 +469,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
- "common",
  "inferno",
- "interpret",
  "memtrack",
  "open",
 ]
@@ -496,6 +486,7 @@ dependencies = [
 [[package]]
 name = "memtrack"
 version = "0.1.0"
+source = "git+https://github.com/blkmlk/memtrack-rs#552085a07ad4472e54d00b1999a82ef772443d66"
 dependencies = [
  "common",
  "ctor",

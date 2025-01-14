@@ -3,7 +3,7 @@ mod flamegraph;
 use crate::flamegraph::build_flamegraph;
 use anyhow::Context;
 use clap::Parser;
-use interpret::interpret::Interpreter;
+use memtrack::common::interpret::Interpreter;
 use std::fs::remove_file;
 use std::path::PathBuf;
 
@@ -32,7 +32,7 @@ fn main() {
 
     interpret.exec(opt.cmd, opt.args, cwd, lib_path).unwrap();
 
-    let data = common::parser::Parser::new()
+    let data = memtrack::common::parser::Parser::new()
         .parse_file(&trace_filepath)
         .unwrap();
 
