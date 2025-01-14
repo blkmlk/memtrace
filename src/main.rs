@@ -18,23 +18,23 @@ struct Opt {
     args: Vec<String>,
 }
 
-fn main() {
+fn main() -> Result<(), anyhow::Error> {
     let opt = Opt::parse();
 
     let pid = std::process::id();
     let trace_filepath = format!("/tmp/{}.trace", pid);
 
-    let mut interpret = Interpreter::new(&trace_filepath).unwrap();
+    let mut interpret = Interpreter::new(&trace_filepath).context("failed to create trace file")?;
 
-    let cwd = std::env::current_dir().unwrap();
+    let cwd = std::env::current_dir().context("failed to get current directory")?;
 
     let lib_path = env!("LIB_PATH");
 
-    interpret.exec(opt.cmd, opt.args, cwd, lib_path).unwrap();
+    interpret.exec(opt.cmd, opt.args, cwd, lib_path).context("failed to execute process")?;
 
     let data = memtrack::common::parser::Parser::new()
         .parse_file(&trace_filepath)
-        .unwrap();
+        .context("failed to parse trace file")?;
 
     let output_file = if let Some(file) = opt.out_file {
         PathBuf::from(file)
@@ -42,7 +42,7 @@ fn main() {
         PathBuf::from("/tmp/flamegraph.svg")
     };
 
-    build_flamegraph(data, &output_file).unwrap();
+    build_flamegraph(data, &output_file).context("failed to build flamegraph")?;
 
     println!(
         "Successfully stored memory flamegraph to {}",
@@ -50,8 +50,10 @@ fn main() {
     );
 
     if !opt.no_open {
-        open::that(output_file).unwrap();
+        open::that(output_file).context("failed to open output file")?;
     }
 
-    remove_file(trace_filepath).unwrap();
+    remove_file(trace_filepath).context("failed to remove trace file")?;
+
+    Ok(())
 }
