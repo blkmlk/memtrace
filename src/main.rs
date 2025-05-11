@@ -4,8 +4,10 @@ use crate::flamegraph::build_flamegraph;
 use anyhow::Context;
 use clap::Parser;
 use memtrack::common::interpret::Interpreter;
-use std::fs::remove_file;
-use std::path::PathBuf;
+use std::fs::{remove_file, File};
+use std::io::BufWriter;
+use std::path::{Path, PathBuf};
+use std::{env, fs, io};
 
 #[derive(Parser)]
 struct Opt {
@@ -21,6 +23,16 @@ struct Opt {
 fn main() -> Result<(), anyhow::Error> {
     let opt = Opt::parse();
 
+    let Some(cargo_home) = env::var_os("CARGO_HOME") else {
+        anyhow::bail!("missing $CARGO_HOME");
+    };
+
+    let lib_path = PathBuf::from(cargo_home)
+        .join("lib")
+        .join("libmemtrack.dylib");
+
+    load_lib_if_needed(&lib_path).context("failed to load library")?;
+
     let pid = std::process::id();
     let trace_filepath = format!("/tmp/{}.trace", pid);
 
@@ -28,9 +40,9 @@ fn main() -> Result<(), anyhow::Error> {
 
     let cwd = std::env::current_dir().context("failed to get current directory")?;
 
-    let lib_path = env!("LIB_PATH");
-
-    interpret.exec(opt.cmd, opt.args, cwd, lib_path).context("failed to execute process")?;
+    interpret
+        .exec(opt.cmd, opt.args, cwd, lib_path.to_str().unwrap())
+        .context("failed to execute process")?;
 
     let data = memtrack::common::parser::Parser::new()
         .parse_file(&trace_filepath)
@@ -39,7 +51,7 @@ fn main() -> Result<(), anyhow::Error> {
     let output_file = if let Some(file) = opt.out_file {
         PathBuf::from(file)
     } else {
-        PathBuf::from("/tmp/flamegraph.svg")
+        PathBuf::from(format!("/tmp/flamegraph_{}.svg", pid))
     };
 
     build_flamegraph(data, &output_file).context("failed to build flamegraph")?;
@@ -54,6 +66,27 @@ fn main() -> Result<(), anyhow::Error> {
     }
 
     remove_file(trace_filepath).context("failed to remove trace file")?;
+
+    Ok(())
+}
+
+fn load_lib_if_needed(path: impl AsRef<Path>) -> Result<(), anyhow::Error> {
+    if path.as_ref().is_file() {
+        return Ok(());
+    }
+
+    fs::create_dir_all(&path).context("failed to create dirs")?;
+
+    let mut response = reqwest::blocking::get(
+        "https://github.com/blkmlk/memtrack-rs/releases/download/v0.2/libmemtrack.dylib",
+    )
+    .context("failed to download libmemtrack.dylib")?;
+
+    let mut out_file = BufWriter::new(File::create(path).context("failed to create output file")?);
+
+    io::copy(&mut response, &mut out_file).context("failed to write output file")?;
+
+    println!("Successfully loaded libmemtrack.dylib");
 
     Ok(())
 }
