@@ -79,7 +79,7 @@ fn load_lib_if_needed(path: impl AsRef<Path>) -> Result<(), anyhow::Error> {
     fs::create_dir_all(path.as_ref().parent().unwrap()).context("failed to create dirs")?;
 
     let mut response = reqwest::blocking::get(
-        "https://github.com/blkmlk/memtrack-rs/releases/download/v0.2/libmemtrack.dylib",
+        "https://github.com/blkmlk/memtrack-rs/releases/download/v0.1.0/libmemtrack.dylib",
     )
     .context("failed to download libmemtrack.dylib")?;
 
