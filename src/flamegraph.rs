@@ -1,5 +1,5 @@
 use anyhow::Context;
-use memtrack::common::parser::{AccumulatedData, Frame, InstructionPointer};
+use common::parser::{AccumulatedData, Frame, InstructionPointer};
 use inferno::flamegraph::color::BasicPalette;
 use inferno::flamegraph::{Options, Palette};
 use std::fs::OpenOptions;
