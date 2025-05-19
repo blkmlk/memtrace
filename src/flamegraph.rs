@@ -40,7 +40,7 @@ pub fn build_flamegraph(
         let allocation = &data.allocations[info.allocation_idx as usize];
         let mut trace_idx = allocation.trace_idx;
 
-        let mut line = Line::new(info.size);
+        let mut line = Line::new(allocation.data.peak);
         while trace_idx != 0 {
             let trace = &data.traces[trace_idx as usize - 1];
             let ip_info = &data.instruction_pointers[trace.ip_idx as usize - 1];
