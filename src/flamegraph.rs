@@ -1,7 +1,7 @@
 use anyhow::Context;
-use common::parser::{AccumulatedData, Frame, InstructionPointer};
 use inferno::flamegraph::color::BasicPalette;
 use inferno::flamegraph::{Options, Palette};
+use memtrack_utils::parser::{AccumulatedData, Frame, InstructionPointer};
 use std::fs::OpenOptions;
 use std::iter;
 use std::path::Path;

@@ -3,7 +3,7 @@ mod flamegraph;
 use crate::flamegraph::build_flamegraph;
 use anyhow::Context;
 use clap::Parser;
-use common::interpret::Interpreter;
+use memtrack_utils::interpret::Interpreter;
 use std::fs::{remove_file, File};
 use std::io::BufWriter;
 use std::path::{Path, PathBuf};
@@ -44,7 +44,7 @@ fn main() -> Result<(), anyhow::Error> {
         .exec(opt.cmd, opt.args, cwd, lib_path.to_str().unwrap())
         .context("failed to execute process")?;
 
-    let data = common::parser::Parser::new()
+    let data = memtrack_utils::parser::Parser::new()
         .parse_file(&trace_filepath)
         .context("failed to parse trace file")?;
 
