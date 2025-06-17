@@ -870,7 +870,6 @@ dependencies = [
  "inferno",
  "memtrack-utils",
  "open",
- "reqwest",
 ]
 
 [[package]]
@@ -884,15 +883,17 @@ dependencies = [
 
 [[package]]
 name = "memtrack-utils"
-version = "0.1.0"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1f12a513e91d5940c68339d271b76afb2554b7404c18d53002554068843b31c"
+checksum = "99c9b639c40d58f1a83c9080e5f9c7fe23762f93be6fce452ffad8c35c144660"
 dependencies = [
  "addr2line",
+ "anyhow",
  "bincode",
  "indexmap",
  "nix",
  "rangemap",
+ "reqwest",
  "rustc-demangle",
  "serde",
  "thiserror",
