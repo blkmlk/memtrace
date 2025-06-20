@@ -1,11 +1,11 @@
 [package]
-name = "memgtrace"
+name = "memtrace"
 version = "0.1.0"
 edition = "2024"
 homepage = "https://github.com/blkmlk/memtrace"
 license = "MIT"
-description = "A CLI tool for generation a heap consumption flamegraph"
-keywords = ["dylib", "heap", "memory", "profile"]
+description = "A CLI tool for generation heap consumption flamegraphs"
+keywords = ["heap", "memory", "profile", "trace", "flamegraph"]
 categories = ["os"]
 repository = "https://github.com/blkmlk/memtrace"
 

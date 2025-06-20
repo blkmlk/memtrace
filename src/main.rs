@@ -1,3 +1,21 @@
+//!
+//! # MemTrace
+//!
+//!
+//! **HeapFlame** is a Rust-based tool for visualizing heap memory usage over time using flamegraphs. It helps you identify allocation-heavy code paths and memory bottlenecks in your Rust applications.
+//! ![example](example.svg)
+//!
+//! ## Installation
+//!
+//! ```bash
+//! cargo install memtrace
+//! ```
+//!
+//! ## Usage
+//! ```bash
+//! memtrace <your_program>
+//! ```
+
 mod flamegraph;
 
 use crate::flamegraph::build_flamegraph;
