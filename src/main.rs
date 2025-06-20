@@ -9,7 +9,7 @@ use std::env;
 use std::fs::remove_file;
 use std::path::PathBuf;
 
-const LIB_VERSION: &str = "v0.1.0";
+const LIB_VERSION: &str = "v0.2.0";
 
 #[derive(Parser)]
 struct Opt {
