@@ -1,11 +1,17 @@
 [package]
-name = "memgraph"
+name = "memgtrace"
 version = "0.1.0"
 edition = "2024"
+homepage = "https://github.com/blkmlk/memtrace"
+license = "MIT"
+description = "A CLI tool for generation a heap consumption flamegraph"
+keywords = ["dylib", "heap", "memory", "profile"]
+categories = ["os"]
+repository = "https://github.com/blkmlk/memtrace"
 
 [dependencies]
 inferno = "0.12.0"
 anyhow = "1.0"
 clap = "4.5"
 open = "5.3"
-memtrack-utils = "0.2.0"
+memtrace-utils = "0.4.0"

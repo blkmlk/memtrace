@@ -3,8 +3,8 @@ mod flamegraph;
 use crate::flamegraph::build_flamegraph;
 use anyhow::Context;
 use clap::Parser;
-use memtrack_utils::common::download_lib_if_needed;
-use memtrack_utils::interpret::Interpreter;
+use memtrace_utils::common::download_lib_if_needed;
+use memtrace_utils::interpret::Interpreter;
 use std::env;
 use std::fs::remove_file;
 use std::path::PathBuf;
@@ -45,7 +45,7 @@ fn main() -> Result<(), anyhow::Error> {
         .exec(opt.cmd, opt.args, cwd, &lib_path)
         .context("failed to execute process")?;
 
-    let data = memtrack_utils::parser::Parser::new()
+    let data = memtrace_utils::parser::Parser::new()
         .parse_file(&trace_filepath)
         .context("failed to parse trace file")?;
 
