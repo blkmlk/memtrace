@@ -8,9 +8,9 @@
 
 A Rust-based tool for visualizing heap memory consumption using flamegraphs. It helps you profile your app
 
-> ⚠️ **Warning:** at the moment the tool requires to download a dynamic library to work. The library is opensource, you can find it [here](https://github.com/blkmlk/memtrace-lib)
+> ⚠️ **Warning:** At the moment, this tool requires downloading a dynamic library to function. The library is open source and can be found [here](#).
 >
-> If you know a better solution - welcome to pull requests
+> If you know a better solution - feel free to open a pull request
 
 ### Installation
 
