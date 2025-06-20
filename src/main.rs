@@ -48,11 +48,11 @@ struct Opt {
 fn main() -> Result<(), anyhow::Error> {
     let opt = Opt::parse();
 
-    let Some(cargo_home) = env::var_os("CARGO_HOME") else {
-        anyhow::bail!("missing $CARGO_HOME");
+    let Some(home) = env::var_os("HOME") else {
+        anyhow::bail!("missing $HOME");
     };
 
-    let lib_dir = PathBuf::from(cargo_home).join("lib");
+    let lib_dir = PathBuf::from(home).join(".cargo").join("lib");
 
     let lib_path =
         download_lib_if_needed(&lib_dir, LIB_VERSION).context("failed to load library")?;
