@@ -6,7 +6,9 @@
 //!
 //! A Rust-based tool for visualizing heap memory consumption using flamegraphs. It helps you profile your app
 //!
-//! > ⚠️ **Warning:** At the moment, this tool requires downloading a dynamic library to function. The library is open source and can be found [here](#).
+//! > ℹ️ **Info:** So far, the tool works only on MacOS.
+//!
+//! > ⚠️ **Warning:** At the moment, this tool requires downloading a dynamic library to function. The library is open source and can be found [here](https://github.com/blkmlk/memtrace-lib).
 //! >
 //! > If you know a better solution - feel free to open a pull request
 //!
@@ -31,6 +33,9 @@ use memtrace_utils::interpret::Interpreter;
 use std::env;
 use std::fs::remove_file;
 use std::path::PathBuf;
+
+#[cfg(not(target_os = "macos"))]
+compile_error!("This binary works only on MacOS!");
 
 const LIB_VERSION: &str = "v0.2.0";
 
