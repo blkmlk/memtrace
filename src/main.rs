@@ -4,7 +4,9 @@
 //!
 //! ![example](example.svg)
 //!
-//! A Rust-based tool for visualizing heap memory consumption using flamegraphs. It helps you profile your app
+//! A Rust-based tool for visualizing heap memory consumption using flamegraphs. It helps you profile your app.
+//!
+//! The tool is using the [flamegraph](https://github.com/flamegraph-rs/flamegraph) crate for building flamegraphs
 //!
 //! > ℹ️ **Info:** So far, the tool works only on MacOS.
 //!
