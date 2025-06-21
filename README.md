@@ -23,6 +23,7 @@ cargo install memtrace
 ```
 
 ### Usage
+> ℹ️ **Info:** Make sure your app is built in debug mode
 ```bash
 memtrace <your_program>
 ```
