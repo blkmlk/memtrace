@@ -3,7 +3,6 @@ use inferno::flamegraph::color::BasicPalette;
 use inferno::flamegraph::{Options, Palette};
 use memtrace_utils::parser::{AccumulatedData, Frame, InstructionPointer};
 use std::fs::OpenOptions;
-use std::iter;
 use std::path::Path;
 
 struct Line {
@@ -73,8 +72,10 @@ pub fn build_flamegraph(
 }
 
 fn get_frames_from_ip_info(data: &AccumulatedData, ip_info: &InstructionPointer) -> Vec<String> {
-    iter::once(&ip_info.frame)
-        .chain(ip_info.inlined.iter())
+    ip_info
+        .frame
+        .iter()
+        .chain(&ip_info.inlined)
         .map(|frame| {
             let function_idx = match frame {
                 Frame::Single { function_idx } => function_idx,

@@ -10,7 +10,7 @@ A Rust-based tool for visualizing heap memory consumption using flamegraphs. It 
 
 The tool is using the [flamegraph](https://github.com/flamegraph-rs/flamegraph) crate for building flamegraphs
 
-> ℹ️ **Info:** So far, the tool works only on MacOS.
+> ℹ️ **Info:** The tool supports Linux and MacOS.
 
 > ⚠️ **Warning:** At the moment, this tool requires downloading a dynamic library to function. The library is open source and can be found [here](https://github.com/blkmlk/memtrace-lib).
 >
