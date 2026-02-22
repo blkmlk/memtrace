@@ -8,7 +8,7 @@
 //!
 //! The tool is using the [flamegraph](https://github.com/flamegraph-rs/flamegraph) crate for building flamegraphs
 //!
-//! > ℹ️ **Info:** So far, the tool works only on MacOS.
+//! > ℹ️ **Info:** The tool supports Linux and MacOS.
 //!
 //! > ⚠️ **Warning:** At the moment, this tool requires downloading a dynamic library to function. The library is open source and can be found [here](https://github.com/blkmlk/memtrace-lib).
 //! >
@@ -37,10 +37,10 @@ use std::env;
 use std::fs::remove_file;
 use std::path::PathBuf;
 
-#[cfg(not(target_os = "macos"))]
-compile_error!("This binary works only on MacOS!");
+#[cfg(all(not(target_os = "macos"), not(target_os = "linux")))]
+compile_error!("This binary supports only on Linux and MacOS!");
 
-const LIB_VERSION: &str = "v0.2.0";
+const LIB_VERSION: &str = "v0.3.0";
 
 #[derive(Parser)]
 struct Opt {
