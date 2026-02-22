@@ -1,6 +1,6 @@
 [package]
 name = "memtrace"
-version = "0.3"
+version = "0.3.0"
 edition = "2024"
 homepage = "https://github.com/blkmlk/memtrace"
 license = "MIT"
