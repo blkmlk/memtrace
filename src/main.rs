@@ -40,7 +40,7 @@ use std::path::PathBuf;
 #[cfg(all(not(target_os = "macos"), not(target_os = "linux")))]
 compile_error!("This binary supports only on Linux and MacOS!");
 
-const LIB_VERSION: &str = "v0.3.0";
+const LIB_VERSION: &str = "v0.4.0";
 
 #[derive(Parser)]
 struct Opt {
